@@ -1,0 +1,28 @@
+#r "Newtonsoft.Json"
+
+using System;
+using System.Net;
+using Newtonsoft.Json;
+using System.Xml;
+
+public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
+{
+    //read HTTP Request Message
+     string requestBody = await req.Content.ReadAsStringAsync();
+ 
+    //requestBody is an XML format from DocuSign Connect, so load this into an XML document
+    XmlDocument doc = new XmlDocument();
+    doc.LoadXml(requestBody);
+
+    //convert requestBody XML to JSON
+    requestBody = JsonConvert.SerializeXmlNode(doc);
+
+    dynamic data = JsonConvert.DeserializeObject(requestBody);
+
+    //log Envelope ID and Status
+    log.Info("EnvelopeID: " + data.DocuSignEnvelopeInformation.EnvelopeStatus.EnvelopeID.ToString());
+    log.Info("Status: " + data.DocuSignEnvelopeInformation.EnvelopeStatus.Status.ToString());
+
+    //return status
+    return req.CreateResponse(HttpStatusCode.OK, "OK");
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DocuSignEnvelopeInformation
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.docusign.net/API/3.0">
+    <EnvelopeStatus>
+        <EnvelopeID>00000000-0000-0000-0000-000000000000</EnvelopeID>
+        <Status>Sent</Status>
+    </EnvelopeStatus>
+</DocuSignEnvelopeInformation>
